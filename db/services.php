@@ -32,6 +32,106 @@ $functions = array(
         'description' => 'Retrieve the plugin settings.',
         'type'        => 'read',
     ),
+
+    'local_mobile_mod_quiz_get_quizzes_by_courses' => array(
+        'classname'     => 'local_mobile_external',
+        'methodname'    => 'mod_quiz_get_quizzes_by_courses',
+        'description'   => 'Returns a list of quizzes in a provided list of courses,
+                            if no list is provided all quizzes that the user can view will be returned.',
+        'type'          => 'read',
+        'capabilities'  => 'mod/quiz:view',
+    ),
+
+    'local_mobile_mod_quiz_get_attempt_data' => array(
+        'classname'     => 'local_mobile_external',
+        'methodname'    => 'mod_quiz_get_attempt_data',
+        'description'   => 'Returns information for the given attempt page for a quiz attempt in progress.',
+        'type'          => 'read',
+        'capabilities'  => 'mod/quiz:attempt',
+    ),
+
+    'local_mobile_mod_quiz_start_attempt' => array(
+        'classname'     => 'local_mobile_external',
+        'methodname'    => 'mod_quiz_start_attempt',
+        'description'   => 'Starts a new attempt at a quiz.',
+        'type'          => 'write',
+        'capabilities'  => 'mod/quiz:attempt',
+    ),
+
+    'local_mobile_mod_quiz_save_attempt' => array(
+        'classname'     => 'local_mobile_external',
+        'methodname'    => 'mod_quiz_save_attempt',
+        'description'   => 'Processes save requests during the quiz.
+                            This function is intended for the quiz auto-save feature.',
+        'type'          => 'write',
+        'capabilities'  => 'mod/quiz:attempt',
+    ),
+    'local_mobile_mod_quiz_process_attempt' => array(
+        'classname'     => 'local_mobile_external',
+        'methodname'    => 'mod_quiz_process_attempt',
+        'description'   => 'Process responses during an attempt at a quiz and also deals with attempts finishing.',
+        'type'          => 'write',
+        'capabilities'  => 'mod/quiz:attempt',
+    ),
+      'local_mobile_mod_assign_view_assign' => array(
+            'classname'     => 'local_mobile_external',
+            'methodname'    => 'mod_assign_view_assign',
+            'classpath'     => 'local/mobile/externallib.php',
+            'description'   => 'Update the module completion status.',
+            'type'          => 'write',
+            'capabilities'  => 'mod/assign:view',
+      ),
+      'local_mobile_core_course_get_user_navigation_options' => array(
+            'classname' => 'local_mobile_external',
+            'methodname' => 'core_course_get_user_navigation_options',
+            'classpath' => 'local/mobile/externallib.php',
+            'description' => 'Return a list of navigation options in a set of courses that are avaialable or not for the current user.',
+            'type' => 'read',
+      ),
+      'local_mobile_core_course_get_user_administration_options' => array(
+            'classname' => 'local_mobile_external',
+            'methodname' => 'core_course_get_user_administration_options',
+            'classpath' => 'local/mobile/externallib.php',
+            'description' => 'Return a list of administration options in a set of courses that are avaialable or not for the current
+                            user.',
+            'type' => 'read',
+      ),
+      'local_mobile_core_user_update_picture' => array(
+            'classname' => 'local_mobile_external',
+            'methodname' => 'core_user_update_picture',
+            'classpath' => 'local/mobile/externallib.php',
+            'description' => 'Update or delete the user picture in the site',
+            'type' => 'write',
+            'capabilities' => 'moodle/user:editownprofile, moodle/user:editprofile',
+      ),
+      'local_mobile_tool_mobile_get_config' => array(
+            'classname'   => 'local_mobile_external',
+            'methodname'  => 'tool_mobile_get_config',
+            'classpath' => 'local/mobile/externallib.php',
+            'description' => 'Returns a list of the site configurations, filtering by section.',
+            'type'        => 'read',
+      ),
+    'local_mobile_core_course_get_courses_by_field' => array(
+        'classname' => 'local_mobile_external',
+        'methodname' => 'core_course_get_courses_by_field',
+        'classpath' => 'local/mobile/externallib.php',
+        'description' => 'Get courses matching a specific field (id/s, shortname, idnumber, category)',
+        'type' => 'read',
+    ),
+    'local_mobile_tool_mobile_get_plugins_supporting_mobile' => array(
+        'classname'   => 'local_mobile_external',
+        'methodname'  => 'tool_mobile_get_plugins_supporting_mobile',
+        'classpath' => 'local/mobile/externallib.php',
+        'description' => 'Returns a list of Moodle plugins supporting the mobile app.',
+        'type'        => 'read',
+    ),
+    'local_mobile_tool_mobile_get_content' => array(
+        'classname'   => 'local_mobile_external',
+        'methodname'  => 'tool_mobile_get_content',
+        'classpath' => 'local/mobile/externallib.php',
+        'description' => 'Returns a piece of content to be displayed in the Mobile app.',
+        'type'        => 'read',
+    ),
 );
 
 $services = array(
@@ -322,15 +422,9 @@ $services = array(
             'tool_lp_data_for_plan_page',
             'tool_lp_data_for_user_competency_summary',
             'tool_lp_data_for_user_competency_summary_in_course',
-            'tool_lp_data_for_user_competency_summary_in_plan',
-            'tool_lp_data_for_user_evidence_list_page',
-            'tool_lp_data_for_user_evidence_page',
-            'tool_mobile_get_autologin_key',
-            'tool_mobile_get_config',
-            'tool_mobile_get_plugins_supporting_mobile',
-            'tool_mobile_get_public_config',
-            'core_get_component_strings',   // Don't remove this, the app relies on this to check the min version.
-            'local_mobile_get_plugin_settings',
+            'tool_lp_data_for_course_competencies_page',
+            'local_mobile_tool_mobile_get_plugins_supporting_mobile',
+            'local_mobile_tool_mobile_get_content',
         ),
         'enabled' => 0,
         'restrictedusers' => 0,
